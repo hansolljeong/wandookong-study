@@ -3,7 +3,7 @@
 /node_modules
 
 # config
-/src/auth/constants.ts
+*.env
 
 # Logs
 logs

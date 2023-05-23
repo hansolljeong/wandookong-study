@@ -6,13 +6,17 @@ describe('AuthService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [AuthService],
+      imports: [AuthService],
     }).compile();
 
     service = module.get<AuthService>(AuthService);
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  it('login() - accessToken 반환', async () => {
+    const result = await service.login({
+      email: 'test@wandookong.com',
+      password: 'password',
+    });
+    expect(result.access_token).toBeDefined();
   });
 });

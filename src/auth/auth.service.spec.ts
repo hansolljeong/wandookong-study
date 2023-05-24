@@ -17,6 +17,6 @@ describe('AuthService', () => {
       email: 'test@wandookong.com',
       password: 'password',
     });
-    expect(result.access_token).toBeDefined();
+    expect(result.accessToken).toBeDefined();
   });
 });

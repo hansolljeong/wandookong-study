@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
+import { SignInDto, SignInResponseDto } from './dto/sign-in.dto';
 
 @Injectable()
 export class AuthService {
@@ -25,7 +26,7 @@ export class AuthService {
     return user;
   }
 
-  async signIn({ email, password }) {
+  async signIn({ email, password }: SignInDto): Promise<SignInResponseDto> {
     const user = await this.usersService.getUserByEmail(email);
     if (!user) throw new UnauthorizedException('사용자를 찾을 수 없습니다.');
 
@@ -35,7 +36,7 @@ export class AuthService {
 
     const payload = { userId: user.id, secret: process.env.JWT_SECRET };
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      accessToken: await this.jwtService.signAsync(payload),
     };
   }
 }

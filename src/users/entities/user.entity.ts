@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class User {
+export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -19,6 +19,9 @@ export class User {
 
   @Column()
   nickname: string;
+
+  @Column()
+  status: number;
 
   @CreateDateColumn()
   created_at: Date;

@@ -1,16 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
+import { AuthUserType } from 'src/common/decorators/auth-user.decorator';
+import { UsersMeResponseDto } from './dto/user-me.dto';
+import { UsersRepository } from './users.repository';
 
 @Injectable()
 export class UsersService {
-  constructor(
-    @InjectRepository(User)
-    private usersRepository: Repository<User>,
-  ) {}
+  constructor(private readonly usersRepository: UsersRepository) {}
 
   async getUserByEmail(email: string) {
-    return this.usersRepository.findOneBy({ email });
+    return this.usersRepository.findOneByEmail(email);
+  }
+
+  async getMe({ userId }: AuthUserType): Promise<UsersMeResponseDto> {
+    const user = await this.usersRepository.findOne(userId);
+
+    return new UsersMeResponseDto(user);
   }
 }

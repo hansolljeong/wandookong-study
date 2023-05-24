@@ -12,8 +12,8 @@ describe('AuthService', () => {
     service = module.get<AuthService>(AuthService);
   });
 
-  it('login() - accessToken 반환', async () => {
-    const result = await service.login({
+  it('signIn() - accessToken 반환', async () => {
+    const result = await service.signIn({
       email: 'test@wandookong.com',
       password: 'password',
     });

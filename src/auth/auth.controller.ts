@@ -6,9 +6,9 @@ import { AuthGuard } from './auth.gaurd';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('/login')
-  async login(@Body() { email, password }) {
-    return this.authService.login({ email, password });
+  @Post('/signIn')
+  async signIn(@Body() { email, password }) {
+    return this.authService.signIn({ email, password });
   }
 
   @Post('/test')

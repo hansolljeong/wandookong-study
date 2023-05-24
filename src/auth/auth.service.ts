@@ -25,7 +25,7 @@ export class AuthService {
     return user;
   }
 
-  async login({ email, password }) {
+  async signIn({ email, password }) {
     const user = await this.usersService.getUserByEmail(email);
     if (!user) throw new UnauthorizedException('사용자를 찾을 수 없습니다.');
 
